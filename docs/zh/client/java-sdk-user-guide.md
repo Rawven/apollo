@@ -540,6 +540,7 @@ apollo-client在2.4.0版本里提供了Monitor-API，供用户可以对client有
  String exporterData = configMonitor.getExporterData();  
 ```
 
+
 | 指标名称                                     | 类型  | 描述  | 标签  |
 |------------------------------------------| --- | --- | --- |
 | apollo_client_exception_num              | counter | Apollo异常计数 |     |
