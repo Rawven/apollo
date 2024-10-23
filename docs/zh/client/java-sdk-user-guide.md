@@ -511,9 +511,7 @@ String content = configFile.getContent();
 
 ### 3.1.5 获取客户端监控指标
 
-apollo-client在2.4.0版本里大幅增强了可观测性，提供了ConfigMonitor-API以及JMX,Prometheus的指标导出方式
-详见 [1.2.4.1 开启客户端监控](#_1241-开启客户端监控)
-相关配置开启请参照 1.2.4.9 小节
+apollo-client在2.4.0版本里大幅增强了可观测性，提供了ConfigMonitor-API以及JMX,Prometheus的指标导出方式,相关启用配置详见 [1.2.4.9 开启客户端监控](#_1249-开启客户端监控)
 
 
 #### 3.1.5.1 以JMX形式暴露状态信息
@@ -550,7 +548,7 @@ apollo.client.monitor.jmx.enabled = true
 
 #### 3.1.5.3 指标数据表格
 
-## Namespace Metrics
+**Namespace Metrics**
 
 | 指标名称                                 | 标签      |
 | ---------------------------------------- | --------- |
@@ -560,7 +558,7 @@ apollo.client.monitor.jmx.enabled = true
 | apollo_client_namespace_timeout          |           |
 | apollo_client_namespace_first_load_time_spend_in_ms | namespace |
 
-## Thread Pool Metrics
+**Thread Pool Metrics**
 
 | 指标名称                                           | 标签             |
 | -------------------------------------------------- | ---------------- |
@@ -574,14 +572,15 @@ apollo.client.monitor.jmx.enabled = true
 | apollo_client_thread_pool_core_pool_size           | thread_pool_name |
 | apollo_client_thread_pool_queue_size               | thread_pool_name |
 
-## Exception Metrics
+**Exception Metrics**
 
 | 指标名称                          | 标签 |
 | --------------------------------- | ---- |
 | apollo_client_exception_num_total |      |
 
 #### 3.1.5.4 客户端对接外部监控系统
-详见 [7.2 MetricsExporter扩展](#_72_metricsExporter扩展)
+
+用户可以根据需求自定义接入Prometheus等监控系统,客户端提供了SPI,详见 [7.2 MetricsExporter扩展](#_7.2_MetricsExporter扩展)
 
 ## 3.2 Spring整合方式
 
@@ -1573,4 +1572,4 @@ registerOrUpdateCounterSample,registerOrUpdateGaugeSample即是用来注册Count
 
 至此，已经将Client的指标数据接入Prometheus。
 
-完整代码:[PrometheusApolloClientMetricsExporter.java]https://github.com/apolloconfig/apollo-java/main/master/apollo-plugin/apollo-plugin-client-prometheus/src/main/java/com/ctrip/framework/apollo/monitor/internal/exporter/impl/PrometheusApolloClientMetricsExporter.java
+完整代码：[PrometheusApolloClientMetricsExporter.java](https://github.com/apolloconfig/apollo-java/main/master/apollo-plugin/apollo-plugin-client-prometheus/src/main/java/com/ctrip/framework/apollo/monitor/internal/exporter/impl/PrometheusApolloClientMetricsExporter.java)
