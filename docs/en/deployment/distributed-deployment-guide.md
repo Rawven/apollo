@@ -769,9 +769,9 @@ apollo.service.registry.cluster=same name with apollo Cluster
 ```
 
 2. (optional) If you want to customize Config Service and Admin Service's uri for Client, 
-for example when deploying on the intranet, 
-if you don't want to expose the intranet ip, 
-you can add a property in `config/application-github.properties` of the Config Service and Admin Service installation package
+   for example when deploying on the intranet, 
+   if you don't want to expose the intranet ip, 
+   you can add a property in `config/application-github.properties` of the Config Service and Admin Service installation package
     ```properties
     apollo.service.registry.uri=http://your-ip-or-domain:${server.port}/
     ```
@@ -1447,6 +1447,14 @@ The default is true, which makes it easy to quickly search for configurations by
 
 If set to false, this feature is disabled
 
+### 3.1.14 apollo.portal.search.perEnvMaxResults - set the Administrator Tool-Global Search for Value function's maximum number of search results for a single individual environment 
+
+> For versions 2.4.0 and above
+
+Default is 200, which means that each environment will return up to 200 results in a single search operation.
+
+Modifying this parameter may affect the performance of the search function, so before modifying it, you should conduct sufficient testing and adjust the value of `apollo.portal.search.perEnvMaxResults` appropriately according to the actual business requirements and system resources to balance the performance and the number of search results.
+
 ## 3.2 Adjusting ApolloConfigDB configuration
 
 Configuration items are uniformly stored in the ApolloConfigDB.ServerConfig table. It should be noted that each environment's ApolloConfigDB.ServerConfig needs to be configured separately, and the modification takes effect in real time for one minute afterwards.
@@ -1512,6 +1520,16 @@ The default is false. Please evaluate the total configuration size and adjust th
 This configuration takes effect when config-service.cache.enabled is set to true, and controls whether the configuration cache key ignores case. The default value is false, which means that cache keys are strictly case-sensitive. In this case, it is necessary to ensure that the capitalization of app.id and apollo.cluster configured in the application is correct, otherwise the correct configuration cannot be obtained. It can be configured as true to ignore case sensitivity.
 
 > This configuration is used to be compatible with the configuration acquisition logic when the cache is not enabled, because MySQL database queries are case-insensitive by default. If the cache is enabled and MySQL is used, it is recommended to configure it as true. If the database used by your Apollo is case-sensitive, you must keep the default configuration as false, otherwise the configuration cannot be obtained.
+
+
+#### 3.2.3.2 config-service.cache.stats.enabled - Whether to enable caching metric statistics function
+> For versions 2.4.0 and above
+
+> `config-service.cache.stats.enabled` The adjustment configuration must be restarted config service to take effect.
+
+This configuration works when `config-service.cache.stats.enabled` is true, it is used to control the opening of the cache statistics function.  
+The default is false, that is, it will not enable the cache statistics function, when it is set to true, it will enable the cache metric statistics function.  
+View metric reference index[Monitoring related-5.2 Metrics](en/design/apollo-design#5.2-Metrics),such as `http://${someIp:somePort}/prometheus`
 
 ### 3.2.4 `item.key.length.limit`- Maximum length limit for configuration item key
 

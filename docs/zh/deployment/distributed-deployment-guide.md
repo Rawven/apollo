@@ -1392,6 +1392,14 @@ portal上“帮助”链接的地址，默认是Apollo github的wiki首页，可
 
 如果设置为 false，则关闭此功能
 
+### 3.1.14 apollo.portal.search.perEnvMaxResults - 设置管理员工具-value的全局搜索功能单次单独环境最大搜索结果的数量
+
+> 适用于2.4.0及以上版本
+
+默认为200，意味着每个环境在单次搜索操作中最多返回200条结果
+
+修改该参数可能会影响搜索功能的性能，因此在修改之前应该进行充分的测试，根据实际业务需求和系统资源情况，适当调整`apollo.portal.search.perEnvMaxResults`的值，以平衡性能和搜索结果的数量
+
 
 ## 3.2 调整ApolloConfigDB配置
 配置项统一存储在ApolloConfigDB.ServerConfig表中，需要注意每个环境的ApolloConfigDB.ServerConfig都需要单独配置，修改完一分钟实时生效。
@@ -1455,6 +1463,15 @@ http://5.5.5.5:8080/eureka/,http://6.6.6.6:8080/eureka/
 默认为 false，即缓存键大小写严格匹配。此时需要确保应用中配置的`app.id`、`apollo.cluster`大小写正确，否则将获取不到正确的配置。可配置为 true, 则忽略大小写。
 
 > 这个配置用于兼容未开启缓存时的配置获取逻辑，因为 MySQL 数据库查询默认字符串匹配大小写不敏感。如果开启了缓存，且用了 MySQL，建议配置 true。如果你 Apollo 使用的数据库字符串匹配大小写敏感，那么必须保持默认配置 false，否则将获取不到配置。
+
+#### 3.2.3.2 config-service.cache.stats.enabled - 是否开启缓存metric统计功能
+> 适用于2.4.0及以上版本
+
+> `config-service.cache.stats.enabled` 配置调整必须重启 config service 才能生效
+
+该配置作用于`config-service.cache.stats.enabled`为 true 时，用于控制开启缓存统计功能。  
+默认为 false，即不会开启缓存统计功能，当配置为 true 时，开启缓存metric统计功能  
+指标查看参考[监控相关-5.2 Metrics](zh/design/apollo-design#5.2-Metrics)，如`http://${someIp:somePort}/prometheus`
 
 ### 3.2.4 item.key.length.limit - 配置项 key 最大长度限制
 
